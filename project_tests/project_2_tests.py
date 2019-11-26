@@ -3,63 +3,39 @@ import numpy as np
 
 import sys
 
+GREEN = '\033[32m'
+RED = '\033[31m'
+BLACK = '\033[30m'
 
-def test_initialize_weights_and_biases(function):
+def test_initialize_weights_and_biases(func):
 
-    function_inputs = [5,4,4,2]
+    inputs = [12, 2]
 
-    function_correct_outputs = {'biases': [np.array([[0., 0., 0., 0.]]),
-                                           np.array([[0., 0., 0., 0.]]),
-                                           np.array([[0., 0.]])],
-                                'weights': [np.array([[-0.1355025 ,  0.35978839, -0.81630981, -0.32278956],
-                                                   [-0.57684521, -0.66570829, -0.51233493, -0.25219828],
-                                                   [-0.16857801,  0.06338746, -0.13195481,  0.30246218],
-                                                   [-0.48262746,  0.61746319, -0.77177283,  0.27837228],
-                                                   [-0.13504069,  0.09584009, -0.58724567, -0.4929982 ]]),
-                                            np.array([[ 0.52090487,  0.81105284, -0.3231588 ,  0.33311254],
-                                                   [ 0.65192514,  0.68347879, -0.71872451, -0.79838053],
-                                                   [-0.57187049,  0.65496203, -0.69568369, -0.1366456 ],
-                                                   [ 0.79308793,  0.05744396,  0.33234091, -0.3195363 ]]),
-                                            np.array([[ 0.37300186,  0.66925134],
-                                                   [-0.96342345,  0.50028863],
-                                                   [ 0.97772218,  0.49633131],
-                                                   [-0.43911202,  0.57855866]])]}
-
-    function_raw_outputs = function(function_inputs)
+    expected_output_W, expected_output_b = np.array([[-0.1086437 ,  0.28847248],
+                                [-0.65450392, -0.25880741],
+                                [-0.46250511, -0.53375407],
+                                [-0.41078181, -0.20220847],
+                                [-0.1351631 ,  0.05082303],
+                                [-0.10579922,  0.24250925],
+                                [-0.38696284,  0.49507194],
+                                [-0.61879489,  0.22319436],
+                                [-0.10827343,  0.07684302],
+                                [-0.47084402, -0.39527794],
+                                [ 0.39376707,  0.61309832],
+                                [-0.24428509,  0.25180941]]), np.array([[0., 0.]])
 
 
-    assert isinstance(function_raw_outputs, type(function_correct_outputs)), \
-        'Wrong type for output. Got {}, expected {}'.format(type(function_raw_outputs), type(function_correct_outputs))
+    output_W, output_b = func(*inputs)
 
-    if not same_keys(function_raw_outputs, function_correct_outputs):
-        print('The keys of the output dictionary does not match the correct output. Expected keys are {}'.format(function_correct_output.keys()))
-
-
-    if same_dictionary(function_raw_outputs, function_correct_outputs):
-        print('Function is correct')
+    if np.isclose(expected_output_W, output_W).all() and np.isclose(expected_output_b, output_b).all():
+        print(GREEN + 'Test passed')
     else:
-        print('For the input {}, your function output is {} \n. The correct output is {}'. format(function_inputs,
-                                                                                                  function_raw_outputs,
-                                                                                                  function_correct_outputs))
+        print(RED + 'Test did not passed' + BLACK)
+        print('For the inputs: {} \nThe expected output {}, {} \nYour function output is {}, {}'.format(
+                inputs, expected_output_W, expected_output_b, output_W, output_b))
 
-def same_keys(d1, d2):
-    keys1 = set(d1.keys())
-    keys2 = set(d2.keys())
 
-    if keys1 - keys2:
-        return False
-    else:
-        return True
 
-def same_dictionary(d1, d2):
-    keys = list(d1.keys())
-
-    for key in keys:
-        for arr1, arr2 in zip(d1[key], d2[key]):
-            if not np.isclose(arr1, arr2, equal_nan = True).all():
-                return False
-
-    return True
 
 def test_activations(func):
 
