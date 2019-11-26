@@ -342,3 +342,45 @@ def test_gradient_descent(func):
             print('For the function {}, learning rate 0.01 and number of iterations 1000; the expected output is {}, your output is {}'.format(names[i], expected_outputs[i], output))
     if check:
         print(GREEN + 'Test Passed' + BLACK)
+
+def test_derivative_tf(func):
+
+    inputs_f = lambda x: x**2
+    inputs_a = 1.
+
+    expected_output = 2.
+
+    output = func(inputs_f, inputs_a).numpy()
+
+    if np.isclose(expected_output, output):
+        print(GREEN + 'Test passed')
+    else:
+        print(RED + 'Test did not passed' + BLACK)
+        print('For the inputs: {}, {} \nThe expected output {} \nYour function output is {}'.format(
+                'f(x)=x^2', inputs_a, expected_output, output))
+
+def test_gradient_descent_tf(func):
+
+    f = lambda x: x**2
+
+    g = lambda x: tf.cos(x)
+
+    functions = [f, g]
+
+    names = ['x^2', 'cos(x)']
+    N = 1000
+    learning_rate = 0.01
+
+    expected_outputs = [[-4.9988826e-06, 2.4988827e-11], [3.135978, -0.99998426]]
+
+    check = True
+
+    for i in range(2):
+        output_x, output_f = func(functions[i], learning_rate, N)
+        output = np.c_[output_x.numpy(), output_f.numpy()]
+        if not np.isclose(expected_outputs[i], output).all():
+            check = False
+            print(RED + 'Test did not passed' + BLACK)
+            print('For the function {}, learning rate 0.01 and number of iterations 1000; the expected output is {}, your output is {}'.format(names[i], expected_outputs[i], output))
+    if check:
+        print(GREEN + 'Test Passed' + BLACK)
