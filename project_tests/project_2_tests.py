@@ -36,7 +36,6 @@ def test_initialize_weights_and_biases(func):
 
 
 
-
 def test_activations(func):
 
     x_in = [np.array([0.30233257263183977]),
@@ -66,9 +65,10 @@ def test_activations(func):
         output = func(x)
         if not np.isclose(expected_outputs[func.__name__][i], output).all():
             check = False
+            print(RED + 'Test did not passed' + BLACK)
             print('For x={}, the expected output is {}, your output is {}'.format(x, expected_outputs[func.__name__][i], output))
     if check:
-        print('Test Passed')
+        print(GREEN + 'Test Passed' + BLACK)
 
 def test_loss(func):
 
