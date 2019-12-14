@@ -81,6 +81,69 @@ def test_loss(func):
     output = func(y_hat, y)
 
     if np.isclose(expected_output, output):
-        print('Test Passed')
+        print(GREEN + 'Test passed')
     else:
+        print(RED + 'Test did not passed' + BLACK)
         print('For y_hat = {} and y = {}, the expected output is {}, your output is {}'.format(y_hat, y, expected_output, output))
+
+
+def test_forward_pass(func):
+    np.random.seed(seed = 1)
+
+    inputs = np.random.randn(4,5)
+    weights, biases = initialize_weights_and_biases(5, 1)
+
+    expected_output = np.array([[0.45058505],
+                             [0.87673696],
+                             [0.18584077],
+                             [0.63547328]])
+
+    output = func(inputs, weights, biases)
+
+    if np.isclose(expected_output, output).all():
+        print(GREEN + 'Test passed')
+    else:
+        print(RED + 'Test did not passed' + BLACK)
+        print('For the input = {}, \n weights = {} and, \n biases = {}, the expected output is {}, your output is {}'.format(inputs, weights, biases, expected_output, output))
+
+
+def test_crossentropy_loss(func):
+    np.random.seed(seed = 1)
+    y = np.random.randint(0,2,4)
+    y_hat = np.random.random(4)
+
+    expected_outputs = np.array([-9.07602963, -1.19622763, -0.1587096 , -0.09688387])
+
+    check = True
+    for i in range(4):
+        output = func(y_hat[i], y[i])
+        if not np.isclose(expected_outputs[i], output):
+            check = False
+            print(RED + 'Test did not passed' + BLACK)
+            print('For y_hat={} and y = {}, the expected output is {}, your output is {}'.format(y_hat[i], y[i], expected_outputs[i], output))
+    if check:
+        print(GREEN + 'Test Passed' + BLACK)
+
+
+def test_update_parameters(func):
+
+    np.random.seed(seed = 1)
+
+    x = np.random.randn(4,5)
+    y = np.random.randint(0,2,5)
+    weights, biases = initialize_weights_and_biases(5, 1)
+    learning_rate = 0.01
+
+    expected_outputs = update_parameters(x, y, weights, biases, learning_rate)
+
+
+    check = True
+    outputs = func(x,y,weights,biases,learning_rate)
+    for i in range(2):
+        if not np.isclose(expected_outputs[i], outputs[i]).all():
+            check = False
+            print(RED + 'Test did not passed' + BLACK)
+            print('For x={}, y = {}, weights = {}, biases = {} and learning_rate = {}, the expected outputs are {}, your outputs are {}'.format(x, y, weights, biases, learning_rate, expected_outputs, outputs))
+            break
+    if check:
+        print(GREEN + 'Test Passed' + BLACK) 
