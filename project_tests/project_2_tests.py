@@ -91,7 +91,10 @@ def test_forward_pass(func):
     np.random.seed(seed = 1)
 
     inputs = np.random.randn(4,5)
-    weights, biases = initialize_weights_and_biases(5, 1)
+
+    np.random.seed(seed = 1)
+    weights = np.random.uniform(low = -1, high = 1, size = (5, 1))
+    biases = np.zeros((1, 1))
 
     expected_output = np.array([[0.45058505],
                              [0.87673696],
@@ -131,7 +134,11 @@ def test_update_parameters(func):
 
     x = np.random.randn(4,5)
     y = np.random.randint(0,2,5)
-    weights, biases = initialize_weights_and_biases(5, 1)
+
+    np.random.seed(seed = 1)
+    weights = np.random.uniform(low = -1, high = 1, size = (5, 1))
+    biases = np.zeros((1, 1))
+
     learning_rate = 0.01
 
     expected_outputs = update_parameters(x, y, weights, biases, learning_rate)
@@ -146,4 +153,19 @@ def test_update_parameters(func):
             print('For x={}, y = {}, weights = {}, biases = {} and learning_rate = {}, the expected outputs are {}, your outputs are {}'.format(x, y, weights, biases, learning_rate, expected_outputs, outputs))
             break
     if check:
-        print(GREEN + 'Test Passed' + BLACK) 
+        print(GREEN + 'Test Passed' + BLACK)
+
+
+def test_accuracy(func):
+    input_y = np.array([[0],[0],[1],[1]])
+    input_y_hat = np.array([[0.3],[0.7],[0.4],[0.8]])
+
+    expected_output = 0.5
+
+    output = func(input_y_hat, input_y)
+
+    if np.isclose(expected_output, output):
+        print(GREEN + 'Test passed')
+    else:
+        print(RED + 'Test did not passed' + BLACK)
+        print('For y_hat = {} and y = {}, the expected output is {}, your output is {}'.format(input_y_hat, input_y, expected_output, output))
