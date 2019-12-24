@@ -372,7 +372,7 @@ def test_gradient_descent_tf(func):
     N = 1000
     learning_rate = 0.01
 
-    expected_outputs = [[-4.9988826e-06, 2.4988827e-11], [3.135978, -0.99998426]]
+    expected_outputs = [[1.1184361e-09 1.2508993e-18], [ 3.1413395  -0.99999994]]
 
     check = True
 
