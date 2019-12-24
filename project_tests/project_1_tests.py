@@ -1,4 +1,5 @@
 import numpy as np
+import tensorflow as tf
 
 GREEN = '\033[32m'
 RED = '\033[31m'
