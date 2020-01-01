@@ -141,7 +141,12 @@ def test_update_parameters(func):
 
     learning_rate = 0.01
 
-    expected_outputs = update_parameters(x, y, weights, biases, learning_rate)
+    expected_outputs = [np.array([[-0.16167306],
+                                    [ 0.43874483],
+                                    [-1.00218754],
+                                    [-0.39745354],
+                                    [-0.70836915]]),
+                        np.array([[-0.00137159]])]
 
 
     check = True
