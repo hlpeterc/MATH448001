@@ -134,7 +134,7 @@ def test_factorize(func):
     check = True
 
     for i in range(len(n_inputs)):
-        if set(expected_outputs[i]) != set(outputs[i]):
+        if expected_outputs[i]) != sorted(outputs[i]):
             check = False
             if not check:
                 print(RED + 'Test did not passed' + BLACK)
