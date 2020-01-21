@@ -385,3 +385,55 @@ def test_gradient_descent_tf(func):
             print('For the function {}, learning rate 0.01 and number of iterations 1000; the expected output is {}, your output is {}'.format(names[i], expected_outputs[i], output))
     if check:
         print(GREEN + 'Test Passed' + BLACK)
+
+def test_prediction(func):
+    inputs_w = np.array([[-0.45176045,  0.12105998],
+                        [ 0.34345957, -0.29514074],
+                        [ 0.71165673, -0.60992503],
+                        [ 0.49464162, -0.42079451],
+                        [ 0.54759857, -0.14452534],
+                        [ 0.61539682, -0.29293027],
+                        [-0.57261352,  0.53456902],
+                        [-0.3827161 ,  0.46649014],
+                        [ 0.48894631, -0.5572066 ],
+                        [-0.57177573, -0.60210415]])
+    inputs_x = np.array([[-0.71496332, -0.2458348 ],
+                        [-0.94674423, -0.77815926],
+                        [ 0.34912805,  0.59955307],
+                        [-0.83894095, -0.53659538],
+                        [-0.58474868,  0.83466713],
+                        [ 0.42262904,  0.10776922],
+                        [-0.39096402,  0.6697081 ],
+                        [-0.12938808,  0.84691243],
+                        [ 0.41210361, -0.04393738],
+                        [-0.74757979,  0.9520871 ]])
+
+    expected_outputs = [1, 0, 0, 0, 0, 1, 1, 1, 1, 0]
+
+    output = [func(w, x) for w, x in zip(inputs_w, inputs_x)]
+
+    check = True
+    for i,(w,x) in enumerate(zip(inputs_w, inputs_x)):
+        output = func(w,x)
+        if output != expected_outputs[i]:
+            check = False
+            print(RED + 'Test did not passed' + BLACK)
+            print('For the inputs w={} and x={}, the expected output is {}, your output is {}'.format(w, x, expected_outputs[i], output))
+    if check:
+        print(GREEN + 'Test Passed')
+
+
+def test_perceptron(func):
+    x = np.array([[-1,1], [0,1], [1,0], [2,1]])
+    y = np.array([0, 0, 1, 1])
+
+    expected_output = np.array([ 1, -1])
+
+    output = func(x,y)
+
+    if np.isclose(expected_output, output).all():
+        print(GREEN + 'Test passed')
+    else:
+        print(RED + 'Test did not passed' + BLACK)
+        print('For the inputs: x={}, y={} \nThe expected output is {} \nYour function output is {}'.format(
+                x, y, expected_output, output))
