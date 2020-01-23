@@ -31,7 +31,6 @@ def load_data(n_features = 2):
 
 def plot_data(x,y):
     plt.scatter(x[:,0], x[:,1], c=y.squeeze())
-    plt.legend()
 
 def plot_decision_boundary(weights, biases, x, y):
     w1 = weights[0,0]
