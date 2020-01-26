@@ -225,10 +225,10 @@ def test_svd(func):
     output_U, output_V, output_sv = func(input_A)
 
     assert expected_output_U.shape == output_U.shape, "For the input {} the expected \
-output shape is {} but got output of shape {}".format(input_A, expected_output_P.shape, output_P.shape)
+output shape is {} but got output of shape {}".format(input_A, expected_output_U.shape, output_U.shape)
 
     assert expected_output_V.shape == output_V.shape, "For the input {} the expected \
-output shape is {} but got output of shape {}".format(input_A, expected_output_D.shape, output_D.shape)
+output shape is {} but got output of shape {}".format(input_A, expected_output_V.shape, output_V.shape)
 
 
     if np.isclose(expected_output_U, output_U).all() and np.isclose(expected_output_V, output_V).all() and \
@@ -236,8 +236,8 @@ np.isclose(expected_output_sv, output_sv).all():
         print(GREEN + 'Test passed')
     else:
         print(RED + 'Test did not passed' + BLACK)
-        print('For the input: {} \nThe expected output {}, {} \nYour function output is {}, {}'.format(
-                input_A, expected_output_D, expected_output_P, output_D, output_P))
+        print('For the input: {} \nThe expected output {}, {}, {} \nYour function output is {}, {}, {}'.format(
+                input_A, expected_output_U, expected_output_V, expected_output_sv, output_U, output_V, output_sv))
 
 def test_coin_toss(func):
 
