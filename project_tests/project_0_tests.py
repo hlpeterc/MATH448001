@@ -96,7 +96,7 @@ def test_is_prime(func):
     else:
         print(RED + 'Test did not passed' + BLACK)
         print('For the inputs: {} \nThe expected outputs are {} \nYour function outputs are {}'.format(
-                inputs, expected_outputs, outputs))
+                n_inputs, expected_outputs, outputs))
 
 def test_factorize(func):
 
