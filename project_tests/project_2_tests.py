@@ -193,6 +193,28 @@ def test_forward_pass(func):
         print(RED + 'Test did not passed' + BLACK)
         print('For the input = {}, \n weights = {} and, \n biases = {}, the expected output is {}, your output is {}'.format(inputs, weights, biases, expected_output, output))
 
+def test_forward_pass_linear_regression(func):
+    np.random.seed(seed = 1)
+
+    inputs = np.random.randn(4,5)
+
+    np.random.seed(seed = 1)
+    weights = np.random.uniform(low = -1, high = 1, size = (5, 1))
+    biases = np.zeros((1, 1))
+
+    expected_output = np.array([[-0.19830715],
+                               [ 1.9618864 ],
+                               [-1.47726572],
+                               [ 0.55577019]])
+
+    output = func(inputs, weights, biases)
+
+    if np.isclose(expected_output, output).all():
+        print(GREEN + 'Test passed')
+    else:
+        print(RED + 'Test did not passed' + BLACK)
+        print('For the input = {}, \n weights = {} and, \n biases = {}, the expected output is {}, your output is {}'.format(inputs, weights, biases, expected_output, output))
+
 
 def test_crossentropy_loss(func):
     np.random.seed(seed = 1)
@@ -258,3 +280,96 @@ def test_accuracy(func):
     else:
         print(RED + 'Test did not passed' + BLACK)
         print('For y_hat = {} and y = {}, the expected output is {}, your output is {}'.format(input_y_hat, input_y, expected_output, output))
+
+
+# Linear Regression test functions
+
+def test_forward_pass_linear_regression(func):
+    np.random.seed(seed = 1)
+
+    inputs = np.random.randn(4,5)
+
+    np.random.seed(seed = 1)
+    weights = np.random.uniform(low = -1, high = 1, size = (5, 1))
+    biases = np.zeros((1, 1))
+
+    expected_output = np.array([[-0.19830715],
+                               [ 1.9618864 ],
+                               [-1.47726572],
+                               [ 0.55577019]])
+
+    output = func(inputs, weights, biases)
+
+    if np.isclose(expected_output, output).all():
+        print(GREEN + 'Test passed')
+    else:
+        print(RED + 'Test did not passed' + BLACK)
+        print('For the input = {}, \n weights = {} and, \n biases = {}, the expected output is {}, your output is {}'.format(inputs, weights, biases, expected_output, output))
+
+def test_mse(func):
+    np.random.seed(seed = 1)
+    input_y_hat = np.random.randint(-10,10,10)
+    np.random.seed(seed = 2)
+    input_y = np.random.randint(-10,10,10)
+
+    expected_output = 40.9
+
+    output = func(input_y_hat, input_y)
+
+    if np.isclose(expected_output, output):
+        print(GREEN + 'Test passed')
+    else:
+        print(RED + 'Test did not passed' + BLACK)
+        print('For y_hat = {} and y = {}, the expected output is {}, your output is {}'.format(input_y_hat, input_y, expected_output, output))
+
+def test_update_parameters_linear_reg(func):
+
+    np.random.seed(seed = 1)
+    x = np.random.randn(4,5)
+
+    np.random.seed(seed = 1)
+    y = np.random.randint(0,2,5)
+
+    np.random.seed(seed = 1)
+    weights = np.random.uniform(low = -1, high = 1, size = (5, 1))
+    biases = np.zeros((1, 1))
+
+    learning_rate = 0.01
+
+    expected_outputs = [np.array([[-0.12948745],
+                                [ 0.4026915 ],
+                                [-0.99276999],
+                                [-0.40248239],
+                                [-0.68476601]]),
+                        np.array([[0.00778958]])]
+
+
+    check = True
+    outputs = func(x,y,weights,biases,learning_rate)
+    for i in range(2):
+        if not np.isclose(expected_outputs[i], outputs[i]).all():
+            check = False
+            print(RED + 'Test did not passed' + BLACK)
+            print('For x={}, y = {}, weights = {}, biases = {} and learning_rate = {}, the expected outputs are {}, your outputs are {}'.format(x, y, weights, biases, learning_rate, expected_outputs, outputs))
+            break
+    if check:
+        print(GREEN + 'Test Passed' + BLACK)
+
+
+def test_explicit_solution(func):
+    np.random.seed(seed = 2)
+    x_train = np.random.random([100])
+    y_train = 5*x_train - 3 + np.random.randn(100)
+
+    x_train = x_train.reshape(-1,1)
+    y_train = y_train.reshape(-1,1)
+
+
+    expected_output = np.array([[ 5.795226  ],
+                                [-3.25893883]])
+    output = func(x_train, y_train)
+
+    if np.isclose(expected_output, output).all():
+        print(GREEN + 'Test Passed' + BLACK)
+    else:
+        print(RED + 'Test did not passed' + BLACK)

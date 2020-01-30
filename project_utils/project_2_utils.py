@@ -46,3 +46,60 @@ def plot_decision_boundary(weights, biases, x, y):
 
     plt.plot(t,t_hat)
     plt.scatter(x[:,0], x[:,1], c=y.squeeze())
+
+
+
+# Linear regression utility functions
+
+def plot_regression_line(w, b):
+    t = np.linspace(-0.1, 1.1, 2000)
+    plt.plot(t, w*t + b, 'b-')
+
+def load_regression_data():
+    np.random.seed(seed = 1)
+    x_train = np.random.random([100])
+    y_train = 5*x_train - 3 + np.random.randn(100)
+
+    x_test = np.random.random([100])
+    y_test = 5*x_test - 3 + np.random.randn(100)
+
+    x_train = x_train.reshape(-1,1)
+    x_test = x_test.reshape(-1,1)
+
+    y_train = y_train.reshape(-1,1)
+    y_test = y_test.reshape(-1,1)
+
+    return x_train, y_train, x_test, y_test
+
+def plot_regression_data(x, y):
+    plt.plot(x.squeeze(),y.squeeze(), '.')
+    plt.xlabel('x')
+    plt.ylabel('y')
+
+def plot_regression_lines(weight_bias_memory):
+    for i, (weight, bias) in enumerate(weight_bias_memory):
+        if i % 10 == 0 or i == len(weight_bias_memory) - 1:
+            plot_regression_line(weight, bias)
+    plt.plot(x_train[:, -1], y_train, 'o')
+
+def mse_from_weights(w, b, x, y):
+    y_hat = np.dot(x, w) + b
+    return np.mean((y-y_hat)**2)
+
+def plot_gradient_descent_progression(weight_bias_memory):
+    delta = 0.1
+    w = np.arange(-2.0, 10.0, delta)
+    b = np.arange(-8.0, 2.0, delta)
+    W, B = np.meshgrid(w,b)
+    mse = np.zeros((len(b),len(w)))
+
+    for i in range(len(w)):
+        for j in range(len(b)):
+            mse[j,i] = mse_from_weights(w[i],b[j], x_train, y_train)
+
+    weight_bias_memory = np.array(weight_bias_memory)
+    fig, ax = plt.subplots()
+    CS = ax.contour(W, B, mse, levels = 200)
+    ax.plot(weight_bias_memory[:,0], weight_bias_memory[:,1], 'ro')
+    plt.xlabel('w');
+    plt.ylabel('b');
