@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 
 DATA_URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"
@@ -103,3 +103,33 @@ def plot_gradient_descent_progression(weight_bias_memory, x_train, y_train):
     ax.plot(weight_bias_memory[:,0], weight_bias_memory[:,1], 'ro')
     plt.xlabel('w');
     plt.ylabel('b');
+
+def load_auto_mpg_data():
+    dataset_path = tf.keras.utils.get_file("auto-mpg.data", "http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data")
+    column_names = ['MPG','Cylinders','Displacement','Horsepower','Weight',
+                'Acceleration', 'Model Year', 'Origin']
+    dataset = pd.read_csv(dataset_path, names=column_names,
+                        na_values = "?", comment='\t',
+                        sep=" ", skipinitialspace=True)
+    dataset = dataset.dropna()
+    dataset['Origin'] = dataset['Origin'].map(lambda x: {1: 'USA', 2: 'Europe', 3: 'Japan'}.get(x))
+    dataset = pd.get_dummies(dataset)
+
+    train_dataset = dataset.sample(frac=0.8,random_state=0)
+    test_dataset = dataset.drop(train_dataset.index)
+
+    train_labels = train_dataset.pop('MPG')
+    test_labels = test_dataset.pop('MPG')
+
+    x_train = train_dataset.values
+    x_test = test_dataset.values
+
+    y_train = train_labels.values.reshape(-1,1)
+    y_test = test_labels.values.reshape(-1,1)
+
+    scaler = StandardScaler()
+    scaler.fit(x_train)
+    x_train = scaler.transform(x_train)
+    x_test = scaler.transform(x_test)
+
+    return x_train, y_train, x_test, y_test
