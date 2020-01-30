@@ -76,17 +76,17 @@ def plot_regression_data(x, y):
     plt.xlabel('x')
     plt.ylabel('y')
 
-def plot_regression_lines(weight_bias_memory):
+def plot_regression_lines(weight_bias_memory, x, y):
     for i, (weight, bias) in enumerate(weight_bias_memory):
         if i % 10 == 0 or i == len(weight_bias_memory) - 1:
             plot_regression_line(weight, bias)
-    plt.plot(x_train[:, -1], y_train, 'o')
+    plt.plot(x[:, -1], y, 'o')
 
 def mse_from_weights(w, b, x, y):
     y_hat = np.dot(x, w) + b
     return np.mean((y-y_hat)**2)
 
-def plot_gradient_descent_progression(weight_bias_memory):
+def plot_gradient_descent_progression(weight_bias_memory, x_train, y_train):
     delta = 0.1
     w = np.arange(-2.0, 10.0, delta)
     b = np.arange(-8.0, 2.0, delta)
