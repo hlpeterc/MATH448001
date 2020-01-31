@@ -132,4 +132,4 @@ def load_auto_mpg_data():
     x_train = scaler.transform(x_train)
     x_test = scaler.transform(x_test)
 
-    return x_train, y_train, x_test, y_test
+    return train_dataset, x_train, y_train, x_test, y_test
