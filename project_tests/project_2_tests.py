@@ -328,7 +328,7 @@ def test_update_parameters_linear_reg(func):
     x = np.random.randn(4,5)
 
     np.random.seed(seed = 1)
-    y = np.random.randint(0,2,5)
+    y = np.random.randint(0,2,size=(4,1))
 
     np.random.seed(seed = 1)
     weights = np.random.uniform(low = -1, high = 1, size = (5, 1))
@@ -336,12 +336,13 @@ def test_update_parameters_linear_reg(func):
 
     learning_rate = 0.01
 
-    expected_outputs = [np.array([[-0.12948745],
-                                [ 0.4026915 ],
-                                [-0.99276999],
-                                [-0.40248239],
-                                [-0.68476601]]),
-                        np.array([[0.00778958]])]
+    expected_outputs = [np.array([[-0.13129853],
+                                [ 0.41385435],
+                                [-0.99921688],
+                                [-0.40625204],
+                                [-0.69334893]]),
+                        np.array([[0.00578958]])]
+
 
 
     check = True
