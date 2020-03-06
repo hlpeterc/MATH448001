@@ -12,7 +12,7 @@ def load_data():
     x_train = x_train/255.
     x_val = x_val/255.
 
-    return x_train, x_test, y_train, y_test
+    return x_train, y_train, x_val, y_val
 
 def plot_data(images, labels):
 
