@@ -22,10 +22,12 @@ def load_data(n_features = 2):
 
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, stratify = y, random_state=2)
 
-    scaler = MinMaxScaler()
+    scaler = StandardScaler()
     scaler.fit(x_train)
     x_train = scaler.transform(x_train)
     x_test = scaler.transform(x_test)
+
+
 
     return x_train[:,:n_features], x_test[:,:n_features], y_train, y_test
 
