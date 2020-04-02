@@ -9,7 +9,7 @@ def load_dogs():
     test_dataset = tfds.load('stanford_dogs', split = 'test', shuffle_files=True)
 
     def resize(item):
-        return tf.image.resize(item['image'], (128,128)), item['label']
+        return tf.image.resize(item['image'], (160,160)), item['label']
 
     train_dataset = train_dataset.map(resize)
     test_dataset = test_dataset.map(resize)
