@@ -38,7 +38,7 @@ def load_cats_dogs():
 
     x_train = []
     y_train = []
-    for item in tfds.as_numpy(dataset):
+    for item in tfds.as_numpy(dataset).take(12000):
         x_train.append(np.expand_dims(item[0], axis = 0))
         y_train.append(item[1])
 
@@ -46,4 +46,4 @@ def load_cats_dogs():
     y_train = np.array(y_train).reshape(-1,1)
 
     x_train = x_train / 127.5 - 1
-    return x_train[0:20000], y_train[0:20000], x_train[20000:], y_train[20000:]
+    return x_train[0:10000], y_train[0:10000], x_train[10000:], y_train[10000:]
