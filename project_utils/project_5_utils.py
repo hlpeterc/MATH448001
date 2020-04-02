@@ -32,7 +32,7 @@ def load_cats_dogs():
     dataset = tfds.load('cats_vs_dogs', split = 'train', shuffle_files=True)
 
     def resize(item):
-        return tf.image.resize(item['image'], (224,224)), item['label']
+        return tf.image.resize(item['image'], (160,160)), item['label']
 
     dataset = dataset.map(resize)
 
