@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import pandas as pd
 
 
 
@@ -40,7 +41,7 @@ def load_partial_mnist():
     return x_train/255., y_train, x_val/255., y_val
 
 
-def plot_sample_data(x_train):
+def plot_sample_data(x_train, y_train):
     plt.figure(figsize=(10,10))
     for i in range(25):
         plt.subplot(5,5,i+1)
@@ -97,6 +98,24 @@ def average_metric(history):
     val_loss_average = np.mean(d[key_list[1]][-5:])
 
     return val_loss_average
+
+def load_data_3():
+    np.random.seed(seed = 2)
+    A = np.random.randint(0, 10, (3,3))
+    cov = np.matmul(A.T, A)
+    X = np.random.multivariate_normal([0,0,0], np.matmul(A.T, A), 100)
+    X = X - np.mean(X, axis = 0)
+
+    return X
+
+def plot_data_3(X):
+    x = X[:,0]
+    y = X[:,1]
+    z = X[:,2]
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.scatter(x,y,z, c=z)
 
 def plot_principal_components(X, principal_components):
     v = principal_components
