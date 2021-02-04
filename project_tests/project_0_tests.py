@@ -12,7 +12,7 @@ def test_square_function(func):
     if (func(x_inputs) == expected_outputs).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: x = {} \nThe expected outputs are {} \nYour function outputs are {}'.format(
                 x_inputs, expected_outputs, func(x_inputs)))
 
@@ -27,7 +27,7 @@ def test_normal_pdf(func):
     if np.isclose(outputs, expected_outputs).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: {} \nThe expected outputs are {} \nYour function outputs are {}'.format(
                 inputs, expected_outputs, outputs))
 
@@ -43,7 +43,7 @@ def test_is_even(func):
     if np.isclose(outputs, expected_outputs).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: {} \nThe expected outputs are {} \nYour function outputs are {}'.format(
                 x_inputs, expected_outputs, outputs))
 
@@ -59,7 +59,7 @@ def test_sum_of_squares(func):
     if np.isclose(outputs, expected_outputs).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: {} \nThe expected outputs are {} \nYour function outputs are {}'.format(
                 x_inputs, expected_outputs, outputs))
 
@@ -74,7 +74,7 @@ def test_taylor_exp(func):
     if np.isclose(outputs, expected_outputs).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: {} \nThe expected outputs are {} \nYour function outputs are {}'.format(
                 inputs, expected_outputs, outputs))
 
@@ -94,7 +94,7 @@ def test_is_prime(func):
     if (outputs == expected_outputs).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: {} \nThe expected outputs are {} \nYour function outputs are {}'.format(
                 n_inputs, expected_outputs, outputs))
 
@@ -137,7 +137,7 @@ def test_factorize(func):
         if expected_outputs[i] != sorted(outputs[i]):
             check = False
             if not check:
-                print(RED + 'Test did not passed' + BLACK)
+                print(RED + 'Test did not pass' + BLACK)
                 print('For the input: {} \nThe expected output is {} \nYour function output is {}'.format(
                         n_inputs[i], expected_outputs[i], outputs[i]))
     if check:
