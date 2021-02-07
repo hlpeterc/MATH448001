@@ -19,7 +19,7 @@ output shape is {} but got output of shape {}".format(inputs, expected_output.sh
     if np.isclose(expected_output, output).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the input: {} \nThe expected outpu is {} \nYour function output is {}'.format(
                 inputs, expected_output, output))
 
@@ -51,10 +51,10 @@ def test_cutoff(func):
         output = func(x, th)
         if not np.isclose(expected_outputs[i], output).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For the input array {} and threshold {}, the expected output is {}, your output is {}'.format(x, th, expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed')
+        print(GREEN + 'Test passed')
 
 def test_max_index(func):
 
@@ -77,10 +77,10 @@ def test_max_index(func):
         output = func(x)
         if not np.isclose(expected_outputs[i], output).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For the input array {}, the expected output is {}, your output is {}'.format(x, expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed')
+        print(GREEN + 'Test passed')
 
 def test_linear(func):
 
@@ -107,10 +107,10 @@ def test_linear(func):
         output = func(W,x,b)
         if not np.isclose(expected_outputs[i], output).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For W={}, x={} and b={}, the expected output is {}, your output is {}'.format(W, x, b, expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed')
+        print(GREEN + 'Test passed')
 
 def test_uniform_matrix(func):
 
@@ -130,10 +130,10 @@ def test_uniform_matrix(func):
         output = func(*x)
         if not np.isclose(expected_outputs[i], output).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For x={}, the expected output is {}, your output is {}'.format(x, expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed')
+        print(GREEN + 'Test passed')
 
 def test_orthogonal(func):
 
@@ -147,10 +147,10 @@ def test_orthogonal(func):
         output = func(u, v)
         if expected_outputs[i] != output:
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For the inputs {} and {}, the expected output is {}, your output is {}'.format(u, v, expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed')
+        print(GREEN + 'Test passed')
 
 def test_rotation(func):
 
@@ -170,74 +170,11 @@ def test_rotation(func):
         output = func(theta)
         if not np.isclose(expected_outputs[i], output).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For the input {}, the expected output is {}, your output is {}'.format(theta, expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed')
-
-def test_eigendecomposition(func):
-
-    input_A = np.array([[1,2,3],[2,5,4],[3,4,8]])
-
-    expected_output_P = np.array([[ 0.31251404,  0.94962   ,  0.0235971 ],
-                                  [ 0.53935014, -0.15693851, -0.82732807],
-                                  [ 0.78194399, -0.27127874,  0.56122317]])
-
-    expected_output_D = np.array([[11.95801072,  0.        ,  0.        ],
-                                  [ 0.        , -0.18754158,  0.        ],
-                                  [ 0.        ,  0.        ,  2.22953087]])
-
-    output_D, output_P = func(input_A)
-
-    assert expected_output_P.shape == output_P.shape, "For the input {} the expected \
-output shape is {} but got output of shape {}".format(input_A, expected_output_P.shape, output_P.shape)
-
-    assert expected_output_D.shape == output_D.shape, "For the input {} the expected \
-output shape is {} but got output of shape {}".format(input_A, expected_output_D.shape, output_D.shape)
-
-
-    if np.isclose(expected_output_P, output_P).all() and np.isclose(expected_output_D, output_D).all():
         print(GREEN + 'Test passed')
-    else:
-        print(RED + 'Test did not passed' + BLACK)
-        print('For the input: {} \nThe expected output {}, {} \nYour function output is {}, {}'.format(
-                input_A, expected_output_D, expected_output_P, output_D, output_P))
 
-
-def test_svd(func):
-
-    np.random.seed(seed = 42)
-    input_A = np.random.randn(4,5)
-
-    expected_output_U = np.array([[ 0.27417936, -0.49296783,  0.79859313, -0.20989859],
-                                  [ 0.13113305,  0.81939406,  0.5163841 ,  0.21153004],
-                                  [-0.76495679,  0.15014816,  0.19924523, -0.59379961],
-                                  [-0.56786522, -0.251061  ,  0.2364272 ,  0.74739524]])
-
-    expected_output_V = np.array([[ 0.22676793, -0.17301671,  0.03873517, -0.81044709,  0.51021234],
-                                  [ 0.32026729,  0.73281909,  0.28598979, -0.31826285, -0.42109814],
-                                  [-0.02482828,  0.12650776,  0.79476804,  0.31884283,  0.50006235],
-                                  [ 0.67954157, -0.56615737,  0.28994071,  0.10430211, -0.35034919],
-                                  [ 0.61936418,  0.31064937, -0.44831638,  0.3596451 ,  0.43537663]])
-
-    expected_output_sv = np.array([3.4364811 , 2.11035904, 1.30357173, 0.36875989])
-
-    output_U, output_V, output_sv = func(input_A)
-
-    assert expected_output_U.shape == output_U.shape, "For the input {} the expected \
-output shape is {} but got output of shape {}".format(input_A, expected_output_U.shape, output_U.shape)
-
-    assert expected_output_V.shape == output_V.shape, "For the input {} the expected \
-output shape is {} but got output of shape {}".format(input_A, expected_output_V.shape, output_V.shape)
-
-
-    if np.isclose(expected_output_U, output_U).all() and np.isclose(expected_output_V, output_V).all() and \
-np.isclose(expected_output_sv, output_sv).all():
-        print(GREEN + 'Test passed')
-    else:
-        print(RED + 'Test did not passed' + BLACK)
-        print('For the input: {} \nThe expected output {}, {}, {} \nYour function output is {}, {}, {}'.format(
-                input_A, expected_output_U, expected_output_V, expected_output_sv, output_U, output_V, output_sv))
 
 def test_coin_toss(func):
 
@@ -251,7 +188,7 @@ def test_coin_toss(func):
     if np.isclose(expected_output, output).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the input: {} \nThe expected output {} \nYour function output is {}'.format(
                 inputs, expected_output, output))
 
@@ -267,7 +204,7 @@ def test_die_roll(func):
     if np.isclose(expected_output, output).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the input: {}, {} \nThe expected output {} \nYour function output is {}'.format(
                 m, p, expected_output, output))
 
@@ -284,7 +221,7 @@ def test_expected_value(func):
     if np.isclose(expected_output, output):
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the input: {}, {} \nThe expected output {} \nYour function output is {}'.format(
                 inputs_f, inputs_P, expected_output, output))
 
@@ -299,7 +236,7 @@ def test_kl_divergence(func):
     if np.isclose(expected_output, output):
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the input: {}, {} \nThe expected output {} \nYour function output is {}'.format(
                 inputs_P, inputs_Q, expected_output, output))
 
@@ -315,7 +252,7 @@ def test_derivative(func):
     if np.isclose(expected_output, output):
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: {}, {} \nThe expected output {} \nYour function output is {}'.format(
                 'f(x)=x^2', inputs_x, expected_output, output))
 
@@ -339,10 +276,10 @@ def test_gradient_descent(func):
         output = func(functions[i], learning_rate, N)
         if not np.isclose(expected_outputs[i], output).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For the function {}, learning rate 0.01 and number of iterations 1000; the expected output is {}, your output is {}'.format(names[i], expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed' + BLACK)
+        print(GREEN + 'Test passed' + BLACK)
 
 def test_derivative_tf(func):
 
@@ -356,7 +293,7 @@ def test_derivative_tf(func):
     if np.isclose(expected_output, output):
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: {}, {} \nThe expected output {} \nYour function output is {}'.format(
                 'f(x)=x^2', inputs_a, expected_output, output))
 
@@ -381,10 +318,10 @@ def test_gradient_descent_tf(func):
         output = np.c_[output_x.numpy(), output_f.numpy()]
         if not np.isclose(expected_outputs[i], output).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For the function {}, learning rate 0.01 and number of iterations 1000; the expected output is {}, your output is {}'.format(names[i], expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed' + BLACK)
+        print(GREEN + 'Test passed' + BLACK)
 
 def test_prediction(func):
     inputs_w = np.array([[-0.45176045,  0.12105998],
@@ -408,7 +345,7 @@ def test_prediction(func):
                         [ 0.41210361, -0.04393738],
                         [-0.74757979,  0.9520871 ]])
 
-    expected_outputs = [1, 0, 0, 0, 0, 1, 1, 1, 1, 0]
+    expected_outputs = [1, -1, -1, -1, -1, 1, 1, 1, 1, -1]
 
     output = [func(w, x) for w, x in zip(inputs_w, inputs_x)]
 
@@ -417,23 +354,23 @@ def test_prediction(func):
         output = func(w,x)
         if output != expected_outputs[i]:
             check = False
-            print(RED + 'Test did not passed' + BLACK)
-            print('For the inputs w={} and x={}, the expected output is {}, your output is {}'.format(w, x, expected_outputs[i], output))
+            print(RED + 'Test did not pass' + BLACK)
+            print('For the inputs w={} and x={} \nThe expected output is {} \nYour function output is {}'.format(w, x, expected_outputs[i], output))
     if check:
         print(GREEN + 'Test Passed')
 
 
 def test_perceptron(func):
     x = np.array([[-1,1], [0,1], [1,0], [2,1]])
-    y = np.array([0, 0, 1, 1])
+    y = np.array([-1, -1, 1, 1])
 
-    expected_output = np.array([ 1, -1])
+    expected_output = np.array([ 1, 0])
 
     output = func(x,y)
 
     if np.isclose(expected_output, output).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: x={}, y={} \nThe expected output is {} \nYour function output is {}'.format(
                 x, y, expected_output, output))

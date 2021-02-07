@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 def load_data():
     np.random.seed(seed=1)
     x_train = np.r_[np.random.randn(100,2)*0.5 + 1, np.random.randn(100,2)*0.5 + -1]
-    y_train = np.r_[np.zeros(100), np.ones(100)]
+    y_train = np.r_[-np.ones(100), np.ones(100)]
 
     return x_train, y_train
 
