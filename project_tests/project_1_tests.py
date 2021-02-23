@@ -357,20 +357,21 @@ def test_prediction(func):
             print(RED + 'Test did not pass' + BLACK)
             print('For the inputs w={} and x={} \nThe expected output is {} \nYour function output is {}'.format(w, x, expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed')
+        print(GREEN + 'Test passed')
 
 
 def test_perceptron(func):
     x = np.array([[-1,1], [0,1], [1,0], [2,1]])
     y = np.array([-1, -1, 1, 1])
 
-    expected_output = np.array([ 1, 0])
+    expected_output_version_1 = np.array([ 1, 0])
+    expected_output_version_2 = np.array([1, -1])
 
     output = func(x,y)
 
-    if np.isclose(expected_output, output).all():
+    if np.isclose(expected_output_version_1, output).all() or np.isclose(expected_output_version_2, output).all():
         print(GREEN + 'Test passed')
     else:
         print(RED + 'Test did not pass' + BLACK)
-        print('For the inputs: x={}, y={} \nThe expected output is {} \nYour function output is {}'.format(
-                x, y, expected_output, output))
+        print('For the inputs: x={}, y={} \nThe expected output is {} or {} depending on your update procedure, \nYour function output is {}'.format(
+                x, y, expected_output_version_1, expected_output_version_2, output))
