@@ -20,7 +20,7 @@ def test_derivative(func):
     if np.isclose(expected_output, output):
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: {}, {} \nThe expected output {} \nYour function output is {}'.format(
                 'f(x)=x^2', inputs_x, expected_output, output))
 
@@ -44,10 +44,10 @@ def test_gradient_descent(func):
         output = func(functions[i], learning_rate, N)
         if not np.isclose(expected_outputs[i], output).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For the function {}, learning rate 0.01 and number of iterations 1000; the expected output is {}, your output is {}'.format(names[i], expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed' + BLACK)
+        print(GREEN + 'Test passed' + BLACK)
 
 def test_derivative_tf(func):
 
@@ -61,7 +61,7 @@ def test_derivative_tf(func):
     if np.isclose(expected_output, output):
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: {}, {} \nThe expected output {} \nYour function output is {}'.format(
                 'f(x)=x^2', inputs_a, expected_output, output))
 
@@ -86,10 +86,10 @@ def test_gradient_descent_tf(func):
         output = np.c_[output_x.numpy(), output_f.numpy()]
         if not np.isclose(expected_outputs[i], output).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For the function {}, learning rate 0.01 and number of iterations 1000; the expected output is {}, your output is {}'.format(names[i], expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed' + BLACK)
+        print(GREEN + 'Test passed' + BLACK)
 
 def test_initialize_weights_and_biases(func):
 
@@ -114,7 +114,7 @@ def test_initialize_weights_and_biases(func):
     if np.isclose(expected_output_W, output_W).all() and np.isclose(expected_output_b, output_b).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the inputs: {} \nThe expected output {}, {} \nYour function output is {}, {}'.format(
                 inputs, expected_output_W, expected_output_b, output_W, output_b))
 
@@ -149,10 +149,10 @@ def test_activations(func):
         output = func(x)
         if not np.isclose(expected_outputs[func.__name__][i], output).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For x={}, the expected output is {}, your output is {}'.format(x, expected_outputs[func.__name__][i], output))
     if check:
-        print(GREEN + 'Test Passed' + BLACK)
+        print(GREEN + 'Test passed' + BLACK)
 
 def test_loss(func):
 
@@ -167,7 +167,7 @@ def test_loss(func):
     if np.isclose(expected_output, output):
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For y_hat = {} and y = {}, the expected output is {}, your output is {}'.format(y_hat, y, expected_output, output))
 
 
@@ -190,7 +190,7 @@ def test_forward_pass(func):
     if np.isclose(expected_output, output).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the input = {}, \n weights = {} and, \n biases = {}, the expected output is {}, your output is {}'.format(inputs, weights, biases, expected_output, output))
 
 def test_forward_pass_linear_regression(func):
@@ -212,7 +212,7 @@ def test_forward_pass_linear_regression(func):
     if np.isclose(expected_output, output).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the input = {}, \n weights = {} and, \n biases = {}, the expected output is {}, your output is {}'.format(inputs, weights, biases, expected_output, output))
 
 
@@ -228,10 +228,10 @@ def test_crossentropy_loss(func):
         output = func(y_hat[i], y[i])
         if not np.isclose(expected_outputs[i], output):
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For y_hat={} and y = {}, the expected output is {}, your output is {}'.format(y_hat[i], y[i], expected_outputs[i], output))
     if check:
-        print(GREEN + 'Test Passed' + BLACK)
+        print(GREEN + 'Test passed' + BLACK)
 
 
 def test_update_parameters(func):
@@ -260,11 +260,11 @@ def test_update_parameters(func):
     for i in range(2):
         if not np.isclose(expected_outputs[i], outputs[i]).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For x={}, y = {}, weights = {}, biases = {} and learning_rate = {}, the expected outputs are {}, your outputs are {}'.format(x, y, weights, biases, learning_rate, expected_outputs, outputs))
             break
     if check:
-        print(GREEN + 'Test Passed' + BLACK)
+        print(GREEN + 'Test passed' + BLACK)
 
 
 def test_accuracy(func):
@@ -278,7 +278,7 @@ def test_accuracy(func):
     if np.isclose(expected_output, output):
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For y_hat = {} and y = {}, the expected output is {}, your output is {}'.format(input_y_hat, input_y, expected_output, output))
 
 
@@ -303,7 +303,7 @@ def test_forward_pass_linear_regression(func):
     if np.isclose(expected_output, output).all():
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For the input = {}, \n weights = {} and, \n biases = {}, the expected output is {}, your output is {}'.format(inputs, weights, biases, expected_output, output))
 
 def test_mse(func):
@@ -319,7 +319,7 @@ def test_mse(func):
     if np.isclose(expected_output, output):
         print(GREEN + 'Test passed')
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
         print('For y_hat = {} and y = {}, the expected output is {}, your output is {}'.format(input_y_hat, input_y, expected_output, output))
 
 def test_update_parameters_linear_reg(func):
@@ -350,11 +350,11 @@ def test_update_parameters_linear_reg(func):
     for i in range(2):
         if not np.isclose(expected_outputs[i], outputs[i]).all():
             check = False
-            print(RED + 'Test did not passed' + BLACK)
+            print(RED + 'Test did not pass' + BLACK)
             print('For x={}, y = {}, weights = {}, biases = {} and learning_rate = {}, the expected outputs are {}, your outputs are {}'.format(x, y, weights, biases, learning_rate, expected_outputs, outputs))
             break
     if check:
-        print(GREEN + 'Test Passed' + BLACK)
+        print(GREEN + 'Test passed' + BLACK)
 
 
 def test_explicit_solution(func):
@@ -371,6 +371,6 @@ def test_explicit_solution(func):
     output = func(x_train, y_train)
 
     if np.isclose(expected_output, output).all():
-        print(GREEN + 'Test Passed' + BLACK)
+        print(GREEN + 'Test passed' + BLACK)
     else:
-        print(RED + 'Test did not passed' + BLACK)
+        print(RED + 'Test did not pass' + BLACK)
