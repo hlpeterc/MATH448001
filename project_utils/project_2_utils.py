@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import StandardScaler
 
 
 DATA_URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"
@@ -22,7 +22,7 @@ def load_data(n_features = 2):
 
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, stratify = y, random_state=2)
 
-    scaler = MinMaxScaler()
+    scaler = StandardScaler()
     scaler.fit(x_train)
     x_train = scaler.transform(x_train)
     x_test = scaler.transform(x_test)
