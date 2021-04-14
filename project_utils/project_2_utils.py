@@ -21,7 +21,8 @@ def load_data(n_features = 2):
     y = np.reshape(y, (-1,1))
 
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, stratify = y, random_state=2)
-
+    
+    # can also try MinMaxScaler here
     scaler = StandardScaler()
     scaler.fit(x_train)
     x_train = scaler.transform(x_train)
