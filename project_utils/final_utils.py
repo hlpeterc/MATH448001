@@ -40,6 +40,9 @@ def load_partial_mnist():
 
     return x_train/255., y_train, x_val/255., y_val
 
+def load_mnist():
+    (x_train, y_train), (x_val, y_val) = tf.keras.datasets.mnist.load_data(path='mnist.npz')
+    return x_train/255., y_train, x_val/255., y_val
 
 def plot_sample_data(x_train, y_train):
     plt.figure(figsize=(10,10))
