@@ -40,10 +40,19 @@ def load_partial_mnist():
 
     return x_train/255., y_train, x_val/255., y_val
 
-def load_mnist():
+def load_mnist_1s_and_8s():
     (x_train, y_train), (x_val, y_val) = tf.keras.datasets.mnist.load_data(path='mnist.npz')
-    return x_train/255., y_train, x_val/255., y_val
-
+    
+    x_train, x_val = x_train/255., x_val/255.
+    
+    x_train_1vs8 = x_train[np.logical_or(y_train == 1, y_train == 8)]
+    x_val_1vs8 = x_val[np.logical_or(y_val == 1, y_val == 8)]
+    
+    y_train_1vs8 = y_train[np.logical_or(y_train == 1, y_train == 8)]
+    y_val_1vs8 = y_val[np.logical_or(y_val == 1, y_val == 8)]
+    
+    return x_train_1vs8, y_train_1vs8, x_val_1vs8, y_val_1vs8
+    
 def plot_sample_data(x_train, y_train):
     plt.figure(figsize=(10,10))
     for i in range(25):
