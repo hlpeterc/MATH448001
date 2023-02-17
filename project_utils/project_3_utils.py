@@ -9,7 +9,7 @@ def plot_decision_boundary(model):
     w = w.numpy()
     b = b.numpy()
 
-    t = np.linspace(-0.1,1,100)
+    t = np.linspace(-0.1,1,10000)
     plt.plot(t, -1/w[1]*(w[0]*t + b))
 
 def plot_data(x,y):
