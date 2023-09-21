@@ -108,14 +108,13 @@ def plot_gradient_descent_progression(weight_bias_memory, x_train, y_train):
     plt.ylabel('b');
 
 def load_auto_mpg_data():
-    dataset_path = tf.keras.utils.get_file("auto-mpg.data", "http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data")
+    dataset_path = pd.read_html("http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data")
     column_names = ['MPG','Cylinders','Displacement','Horsepower','Weight',
                 'Acceleration', 'Model Year', 'Origin']
     dataset = pd.read_csv(dataset_path, names=column_names,
                         na_values = "?", comment='\t',
                         sep=" ", skipinitialspace=True)
     dataset = dataset.dropna()
-    dataset.iloc[:, :-1] = dataset[:, :-1].astype('float')
     dataset['Origin'] = dataset['Origin'].map(lambda x: {1: 'USA', 2: 'Europe', 3: 'Japan'}.get(x))
     dataset = pd.get_dummies(dataset)
 
