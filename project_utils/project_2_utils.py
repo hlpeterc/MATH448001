@@ -115,6 +115,7 @@ def load_auto_mpg_data():
                         na_values = "?", comment='\t',
                         sep=" ", skipinitialspace=True)
     dataset = dataset.dropna()
+    dataset.iloc[:, :-1] = dataset[:, :-1].astype('float')
     dataset['Origin'] = dataset['Origin'].map(lambda x: {1: 'USA', 2: 'Europe', 3: 'Japan'}.get(x))
     dataset = pd.get_dummies(dataset)
 
